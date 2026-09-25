@@ -1,0 +1,116 @@
+/* ============================================================
+   ScanMalware — Design Tokens (CSS Custom Properties)
+   Dark-first. Tema claro opcional via [data-theme="light"].
+   ============================================================ */
+
+:root {
+  /* ---- Cores: superfícies ---- */
+  --bg-base: #0a0e1a;
+  --bg-elevated: #0f172a;
+  --surface: #1e293b;
+  --surface-2: #243449;
+  --surface-hover: #2b3d54;
+  --border: #334155;
+  --border-strong: #475569;
+
+  /* ---- Cores: texto ---- */
+  --text-primary: #e67777;
+  --text-secondary: #fff8f8;
+  --text-muted: #64748b;
+
+  /* ---- Cores: marca + semântica ---- */
+  --brand: #ef4444;
+  --brand-hover: #dc2626;
+  --success: #10b981;
+  --warning: #f59e0b;
+  --danger: #ef4444;
+  --info: #3b82f6;
+
+  /* rgb helpers para alpha */
+  --success-rgb: 16, 185, 129;
+  --warning-rgb: 245, 158, 11;
+  --danger-rgb: 239, 68, 68;
+  --info-rgb: 59, 130, 246;
+
+  /* ---- Escala de risco ---- */
+  --risk-safe: #10b981;
+  --risk-low: #84cc16;
+  --risk-medium: #f59e0b;
+  --risk-high: #ef4444;
+
+  /* ---- Tipografia ---- */
+  --font-display: "Playfair Display", Georgia, "Times New Roman", serif;
+  --font-sans: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-mono: "JetBrains Mono", "SF Mono", ui-monospace, monospace;
+
+  --fs-xs: 0.75rem;   /* 12 */
+  --fs-sm: 0.875rem;  /* 14 */
+  --fs-base: 1rem;    /* 16 */
+  --fs-lg: 1.25rem;   /* 20 */
+  --fs-xl: 1.5rem;    /* 24 */
+  --fs-2xl: 2rem;     /* 32 */
+  --fs-3xl: 3rem;     /* 48 */
+  --fs-4xl: 4rem;     /* 64 */
+
+  --fw-regular: 400;
+  --fw-medium: 500;
+  --fw-semibold: 600;
+  --fw-bold: 700;
+
+  /* ---- Espaçamento (base 4px) ---- */
+  --sp-1: 4px;
+  --sp-2: 8px;
+  --sp-3: 12px;
+  --sp-4: 16px;
+  --sp-6: 24px;
+  --sp-8: 32px;
+  --sp-12: 48px;
+  --sp-16: 64px;
+  --sp-24: 96px;
+
+  /* ---- Raios ---- */
+  --r-input: 8px;
+  --r-card: 12px;
+  --r-container: 16px;
+  --r-pill: 999px;
+
+  /* ---- Sombras ---- */
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.4);
+  --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.4);
+  --shadow-lg: 0 12px 40px rgba(0, 0, 0, 0.5);
+  --glow-danger: 0 0 0 1px rgba(var(--danger-rgb), 0.4), 0 8px 32px rgba(var(--danger-rgb), 0.25);
+  --glow-info: 0 0 0 1px rgba(var(--info-rgb), 0.4), 0 8px 32px rgba(var(--info-rgb), 0.25);
+  --glow-success: 0 0 0 1px rgba(var(--success-rgb), 0.4), 0 8px 32px rgba(var(--success-rgb), 0.25);
+
+  /* ---- Movimento ---- */
+  --dur-fast: 120ms;
+  --dur-base: 200ms;
+  --dur-slow: 400ms;
+  --dur-reveal: 600ms;
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-inout: cubic-bezier(0.65, 0, 0.35, 1);
+
+  /* ---- Layout ---- */
+  --nav-h: 64px;
+  --maxw: 1200px;
+}
+
+/* ============================================================
+   Tema claro opcional
+   ============================================================ */
+[data-theme="light"] {
+  --bg-base: #f8fafc;
+  --bg-elevated: #ffffff;
+  --surface: #ffffff;
+  --surface-2: #f1f5f9;
+  --surface-hover: #e2e8f0;
+  --border: #e2e8f0;
+  --border-strong: #cbd5e1;
+  --text-primary: #703737;
+  --text-secondary: #475569;
+  --text-muted: #94a3b8;
+
+  --shadow-sm: 0 1px 2px rgba(15, 23, 42, 0.06);
+  --shadow-md: 0 4px 16px rgba(15, 23, 42, 0.08);
+  --shadow-lg: 0 12px 40px rgba(15, 23, 42, 0.12);
+}

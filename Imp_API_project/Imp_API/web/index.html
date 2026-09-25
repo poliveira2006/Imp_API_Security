@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="pt-BR" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#0A0E1A" />
+  <meta name="description" content="ScanMalware — análise de segurança de URLs com IA, screenshots e veredito em tempo real." />
+  <title>ScanMalware — Verifique qualquer URL em segundos</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@600;700&family=JetBrains+Mono:wght@400;500;700&display=swap"
+    rel="stylesheet"
+  />
+  <link rel="stylesheet" href="css/tokens.css" />
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+  <!-- ============================ NAV ============================ -->
+  <header class="nav" id="nav">
+    <div class="container">
+      <a class="brand" href="/" aria-label="ScanMalware — início">
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10Z" />
+          <path d="m9 12 2 2 4-4" />
+        </svg>
+        <strong>ScanMalware</strong>
+      </a>
+
+      <div class="nav-right">
+        <span class="status-pill" id="apiStatus">
+          <span class="dot" aria-hidden="true"></span>
+          <span class="txt">API Online</span>
+        </span>
+        <button class="icon-link" id="themeToggle" aria-label="Alternar tema claro/escuro">
+          <svg class="ico-moon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z" />
+          </svg>
+        </button>
+        <a class="icon-link" href="https://github.com" target="_blank" rel="noopener" aria-label="Repositório no GitHub">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <path d="M12 2C6.48 2 2 6.58 2 12.25c0 4.53 2.87 8.37 6.84 9.73.5.1.68-.22.68-.49v-1.72c-2.78.62-3.37-1.37-3.37-1.37-.45-1.18-1.11-1.49-1.11-1.49-.91-.64.07-.62.07-.62 1 .07 1.53 1.06 1.53 1.06.9 1.57 2.36 1.12 2.94.85.09-.67.35-1.12.63-1.38-2.22-.26-4.55-1.14-4.55-5.06 0-1.12.39-2.03 1.03-2.75-.1-.26-.45-1.3.1-2.72 0 0 .84-.28 2.75 1.05a9.34 9.34 0 0 1 5 0c1.91-1.33 2.75-1.05 2.75-1.05.55 1.42.2 2.46.1 2.72.64.72 1.03 1.63 1.03 2.75 0 3.93-2.34 4.79-4.57 5.05.36.32.68.94.68 1.9v2.82c0 .27.18.6.69.49A10.26 10.26 0 0 0 22 12.25C22 6.58 17.52 2 12 2Z" />
+          </svg>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!-- ============================ HERO ============================ -->
+    <section class="hero">
+      <div class="container">
+        <p class="eyebrow reveal">Análise de segurança com IA</p>
+        <h1 class="display reveal">Verifique qualquer URL em segundos</h1>
+        <p class="lede reveal">
+          Análise de segurança com IA, screenshots e veredito em tempo real.
+          Envie um link e receba um score de risco confiável.
+        </p>
+
+        <form class="scan-form reveal" id="scanForm" novalidate>
+          <div class="scan-field">
+            <svg class="field-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71" />
+              <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71" />
+            </svg>
+            <label for="urlInput" class="sr-only">URL para escanear</label>
+            <input
+              id="urlInput"
+              type="url"
+              inputmode="url"
+              autocomplete="off"
+              spellcheck="false"
+              placeholder="https://exemplo.com"
+              aria-describedby="urlError"
+            />
+            <button type="submit" class="btn btn-primary" id="scanBtn">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <circle cx="12" cy="12" r="10" />
+                <path d="M12 2a15 15 0 0 1 0 20M2 12h20" />
+              </svg>
+              <span>Escanear</span>
+            </button>
+          </div>
+          <p class="field-error" id="urlError" role="alert" aria-live="polite"></p>
+        </form>
+
+        <div class="chips reveal">
+          <span class="label">Experimente:</span>
+          <button class="chip" data-example="https://example.com">example.com</button>
+          <button class="chip" data-example="https://github.com">github.com</button>
+          <button class="chip" data-example="https://google.com">google.com</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================ PROGRESS (loading) ============================ -->
+    <section class="section hidden" id="progressSection" aria-live="polite">
+      <div class="container">
+        <div class="progress-card reveal is-visible">
+          <div class="timeline" id="timeline">
+            <div class="tl-step is-active" data-step="0">
+              <span class="tl-dot">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+              </span>
+              <span class="tl-label">Submetido</span>
+            </div>
+            <div class="tl-line" data-line="0"></div>
+            <div class="tl-step" data-step="1">
+              <span class="tl-dot">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12a9 9 0 1 1-6.2-8.5"/></svg>
+              </span>
+              <span class="tl-label">Analisando</span>
+            </div>
+            <div class="tl-line" data-line="1"></div>
+            <div class="tl-step" data-step="2">
+              <span class="tl-dot">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>
+              </span>
+              <span class="tl-label">Concluído</span>
+            </div>
+          </div>
+
+          <div class="progress-bar">
+            <div class="fill" id="progressFill"></div>
+          </div>
+          <p class="progress-meta">
+            Analisando <span class="mono" id="progressUrl">https://exemplo.com</span> ·
+            tempo estimado <span class="mono" id="progressEta">6s</span>
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================ RESULT ============================ -->
+    <section class="section hidden" id="resultSection">
+      <div class="container">
+        <div class="result">
+          <!-- Screenshot -->
+          <div class="reveal">
+            <div class="shot-frame">
+              <div class="shot-bar">
+                <div class="shot-dots" aria-hidden="true"><span></span><span></span><span></span></div>
+                <div class="shot-url" id="shotUrl">https://exemplo.com</div>
+              </div>
+              <div class="shot-canvas">
+                <div class="skeleton" id="shotSkeleton"></div>
+                <img id="shotImg" alt="Captura de tela da página analisada" src="assets/screenshot-sample.png" style="display:none" />
+                <div class="shot-overlay">
+                  <a class="btn btn-ghost btn-sm" id="openTab" href="#" target="_blank" rel="noopener">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 3h6v6M10 14 21 3M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/></svg>
+                    Abrir em nova aba
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Análise -->
+          <div class="analysis reveal">
+            <span class="verdict" id="verdict" data-level="high">Alto Risco</span>
+
+            <div class="gauge-wrap">
+              <div class="gauge" id="gauge" role="img" aria-label="Score de risco">
+                <span class="gauge-num"><span id="gaugeNum"> 0</span><small>Score</small></span>
+              </div>
+              <div class="gauge-desc">
+                <h3 id="gaugeTitle">Risco elevado</h3>
+                <p id="gaugeText">3 indicadores suspeitos encontrados nesta análise.</p>
+              </div>
+            </div>
+
+            <ul class="indicators" id="indicators">
+              <!-- preenchido via JS -->
+            </ul>
+
+            <div class="ai-block is-open" id="aiBlock">
+              <button class="ai-head" id="aiToggle" aria-expanded="true" aria-controls="aiBody">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v3m0 12v3M5.6 5.6l2.1 2.1m8.6 8.6 2.1 2.1M3 12h3m12 0h3M5.6 18.4l2.1-2.1m8.6-8.6 2.1-2.1"/></svg>
+                Análise da IA
+                <svg class="chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
+              </button>
+              <div class="ai-body" id="aiBody">
+                <div class="ai-body-inner" id="aiContent"></div>
+              </div>
+            </div>
+
+            <div class="result-actions">
+              <button class="btn btn-ghost btn-sm">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8Z"/><path d="M14 2v6h6M12 18v-6M9 15h6"/></svg>
+                Exportar PDF
+              </button>
+              <button class="btn btn-ghost btn-sm">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="m8.6 13.5 6.8 4M15.4 6.5l-6.8 4"/></svg>
+                Compartilhar
+              </button>
+              <button class="btn btn-primary btn-sm" id="rescanBtn">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12a9 9 0 0 1 15-6.7L21 8M21 3v5h-5M21 12a9 9 0 0 1-15 6.7L3 16M3 21v-5h5"/></svg>
+                Escanear novamente
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================ ALERTAS (error / offline) ============================ -->
+    <section class="section hidden" id="alertSection">
+      <div class="container">
+        <div class="alert" id="alertBox" data-kind="error">
+          <div class="alert-ico" id="alertIco"></div>
+          <div class="alert-body">
+            <h3 id="alertTitle">Não foi possível concluir a análise</h3>
+            <p id="alertText">A URL informada é inválida ou o serviço externo não respondeu.</p>
+            <div class="alert-actions">
+              <button class="btn btn-primary btn-sm" id="alertRetry">Tentar novamente</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================ HISTÓRICO ============================ -->
+    <section class="section" id="historySection">
+      <div class="container">
+        <div class="history-head reveal">
+          <div>
+            <h2 class="section-title">Scans recentes</h2>
+            <p class="section-sub">Seu histórico de análises, do mais recente ao mais antigo.</p>
+          </div>
+          <div class="filters" role="tablist" aria-label="Filtrar histórico">
+            <button class="is-active" data-filter="all" role="tab" aria-selected="true">Todos</button>
+            <button data-filter="high" role="tab" aria-selected="false">Alto risco</button>
+            <button data-filter="safe" role="tab" aria-selected="false">Seguros</button>
+          </div>
+        </div>
+
+        <div class="history-grid reveal" id="historyGrid"></div>
+
+        <div class="empty hidden reveal" id="historyEmpty">
+          <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10Z"/>
+            <path d="M8 11h8M8 15h5"/>
+          </svg>
+          <h3>Nenhum scan ainda</h3>
+          <p>Escaneie sua primeira URL para começar a construir seu histórico.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================ STATS ============================ -->
+    <section class="section" id="statsSection">
+      <div class="container">
+        <div class="history-head reveal">
+          <div>
+            <h2 class="section-title">Panorama global</h2>
+            <p class="section-sub">Métricas agregadas de todas as análises da plataforma.</p>
+          </div>
+        </div>
+        <div class="stats-grid reveal">
+          <div class="stat-card">
+            <span class="stat-label">Total de scans</span>
+            <span class="stat-value" data-count="128430">0</span>
+            <svg class="spark" viewBox="0 0 120 40" preserveAspectRatio="none" aria-hidden="true">
+              <path class="area" d="M0 32 L15 28 L30 30 L45 20 L60 22 L75 14 L90 16 L105 8 L120 10 L120 40 L0 40 Z"/>
+              <path class="line" d="M0 32 L15 28 L30 30 L45 20 L60 22 L75 14 L90 16 L105 8 L120 10"/>
+            </svg>
+          </div>
+          <div class="stat-card">
+            <span class="stat-label">Sites maliciosos detectados</span>
+            <span class="stat-value"><span data-count="17">0</span>%</span>
+            <span class="stat-foot">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--danger)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 9v4m0 4h.01M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0Z"/></svg>
+              1 em cada 6 URLs enviadas
+            </span>
+          </div>
+          <div class="stat-card">
+            <span class="stat-label">Tempo médio de análise</span>
+            <span class="stat-value"><span data-count="58" data-decimals="1">0</span>s</span>
+            <span class="stat-foot">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--success)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m5 12 5 5 9-9"/></svg>
+              12% mais rápido que a semana passada
+            </span>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ============================ FOOTER ============================ -->
+  <footer class="footer">
+    <div class="container">
+      <a class="brand" href="/">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10Z"/><path d="m9 12 2 2 4-4"/></svg>
+        <strong>ScanMalware</strong>
+      </a>
+      <nav class="footer-links" aria-label="Links do rodapé">
+        <a href="https://scanmalware.com/" target="_blank" rel="noopener">API</a>
+        <a href="https://scanmalware.com/api-docs" target="_blank" rel="noopener">Docs</a>
+        <a href="https://github.com" target="_blank" rel="noopener">GitHub</a>
+      </nav>
+      <div class="footer-meta">
+        <span>© 2026 ScanMalware</span>
+        <span class="ver">v1.0.0</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/app.js"></script>
+</body>
+</html>
